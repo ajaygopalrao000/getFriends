@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  showingFriendsViewController.h
 //  getFriends
 //
 //  Created by Gopal Rao on 6/26/15.
@@ -15,13 +15,14 @@ typedef void (^FriendsCallbackSuccess)(NSArray *successArray);
 typedef void (^FriendsCallbackError)(NSString *errorString);
 
 
-@interface ViewController : UIViewController
+@interface showingFriendsViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>
+{
+    NSMutableArray * dataSource;
+    UITableView * table;
+}
 
 @property (strong,nonatomic)FriendsCallbackSuccess success;
 @property (strong,nonatomic)FriendsCallbackError error;
 //Create an array that will be used for storing the dictionary of friends from facebook
 @property (strong, nonatomic)NSArray *theFriendsArray;
-
-
 @end
-

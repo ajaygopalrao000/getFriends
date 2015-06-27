@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "ViewController.h"
+
 
 @interface AppDelegate ()
 
@@ -17,7 +20,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    ViewController *objVC = [[ViewController alloc] init];
+    UINavigationController * objNavCon = [[UINavigationController alloc] initWithRootViewController: objVC];
+    self.window.rootViewController = objNavCon ;
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                          openURL:url
+                                                sourceApplication:sourceApplication
+                                                       annotation:annotation];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
