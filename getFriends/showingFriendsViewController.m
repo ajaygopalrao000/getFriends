@@ -42,10 +42,6 @@
             //Receive the array that is generated after success
             self.theFriendsArray = successArray;
             dispatch_async(dispatch_get_main_queue(), ^{
-                //[friendsArray removeAllObjects];
-                
-                //[friendsArray addObjectsFromArray:[friendCollection objectForKey:@"geonames"]];
-                //[friendsArray addObject:friendCollection];
                 
                 [table reloadData];
             });
@@ -86,7 +82,7 @@
                         self.success = success;
                         //Read the response in a JSON format
                         id json =[NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-                        //NSLog(@"Dictionary contains data: %@", json );
+                        NSLog(@"Dictionary contains data: %@", json );
                         if([json objectForKey:@"error"]!=nil)
                         {
                         }
@@ -166,7 +162,7 @@
     
     if (cell == nil) {
         
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     }
     
     //Contact * objContact = [dataSource objectAtIndex:indexPath.row];
@@ -179,10 +175,25 @@
     [cell.imageView setContentMode:UIViewContentModeScaleAspectFit];
     //Hide the activity indicator
     [cell.imageView setNeedsLayout];
+    cell.imageView.image = image;
     
     cell.textLabel.text = [dict objectForKey:@"username"];
-    cell.detailTextLabel.text = @"F.B_ID";
-    cell.imageView.image = image;
+    //cell.detailTextLabel.text = @"F.B_ID";
+    //cell.imageView.image = nil; // or cell.poster.image = [UIImage imageNamed:@"placeholder.png"];
+    
+//    dispatch_async(dispatch_get_main_queue(), ^{
+//        NSData *imgData = [NSData dataWithContentsOfURL:[NSURL URLWithString:[dict objectForKey:@"picURL"]]];
+//        if (imgData) {
+//            UIImage *image = [UIImage imageWithData:imgData];
+//            if (image) {
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//                    UITableViewCell *updateCell = (id)[tableView cellForRowAtIndexPath:indexPath];
+//                    if (updateCell)
+//                        updateCell.imageView.image = image;
+//                });
+//            }
+//        }
+//    });
     
      //NSLog(@" in cellForRowAtIndexPath end ");
     return cell;
